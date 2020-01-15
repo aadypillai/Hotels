@@ -1,0 +1,48 @@
+import requests
+import urllib.request
+import time
+from bs4 import BeautifulSoup
+
+start_time = time.time()    # track runtime
+
+url = 'https://hotelcorporatecodes.com/87/marriott-hotels-corporate-and-discount-codes-full-list.html'  # first URL
+response = requests.get(url)
+elementList = []
+print(response)
+soup = BeautifulSoup(response.text, "html.parser")
+for i in soup.findAll("p"):
+    for j in i:
+        try:
+            if 64 < ord((str(j)[0:4]).rstrip().lstrip()[0]) < 91:
+                element = (str(j)[0:4]).rstrip().lstrip()
+                if len(element) != 3 or ord(element[1]) > 96 or ord(element[2]) > 96:   # make sure the code is all CAPS/1234567890, three chars long
+                    break
+                elementList.append(element)
+        except:
+            pass
+
+urltwo = "https://milepro.com/marriott-corporate-codes/"    # import second URL
+headers = {'User-Agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36"}     # attach headers to avoid 403 code
+response = requests.get(urltwo , headers = headers)
+print(response)
+
+soup = BeautifulSoup(response.text, "html.parser")
+elementList2 = []
+for i in soup.findAll("a"):
+    try:
+        if len(i.string) == 3:  # data is cleaner from this site, only need to check if three chars
+            elementList2.append(i.string)
+    except:
+        pass
+
+myList = elementList + elementList2
+myList = list(dict.fromkeys(myList))    # removes any duplicates, as dictionaries cannot have duplicate keys
+myList.sort()
+print("Number of unique codes: " + str(len(myList)))
+
+with open('codes.txt','w'): pass    # clear anything already in the file
+f = open("codes.txt" , "a")
+for i in myList:
+    f.write(i + "\n")   # write all codes to the file
+
+print("--- %s seconds ---" % (time.time() - start_time))    # runtime, should be around 1 second
