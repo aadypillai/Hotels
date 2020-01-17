@@ -1,0 +1,33 @@
+{
+    "manifest_version": 2,
+    "name": "Hotels",
+    "description": "Find the best deals for hotels!",
+    "version": "1",
+    "author": "aadypillai" ,
+
+    "content_scripts": [
+        {
+          "matches": ["http://*/*" , "https://*/*"],
+          "exclude_matches": [],
+          "js": ["main.js"]
+        }
+      ],
+    
+
+    "page_action": {
+        "default_title": "Hotelz"
+    },
+    "permissions": [
+      "tabs", "http://*/*", "https://*/*",
+      "activeTab",
+      "declarativeContent" 
+    ] , 
+
+    "background":   {
+        "scripts":  [
+            "scripts.js"
+        ],
+        "persistent": false
+    }
+  
+}
