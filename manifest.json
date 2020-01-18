@@ -5,20 +5,11 @@
     "version": "1",
     "author": "aadypillai" ,
 
-    "content_scripts": [
-        {
-          "matches": ["http://*/*" , "https://*/*"],
-          "exclude_matches": [],
-          "js": ["main.js"]
-        }
-      ],
-    
-
     "page_action": {
         "default_title": "Hotelz"
     },
     "permissions": [
-      "tabs", "http://*/*", "https://*/*",
+      "tabs", "http://www.marriott.com/reservation/*" , "https://www.marriott.com/reservation/*",
       "activeTab",
       "declarativeContent" 
     ] , 
