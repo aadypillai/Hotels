@@ -4,9 +4,16 @@
     "description": "Find the best deals for hotels!",
     "version": "1",
     "author": "aadypillai" ,
+    
+    "content_scripts": [
+      {
+        "matches": ["https://www.marriott.com/search/findHotels.mi/*"],
+        "js": ["all.js"]
+      }
+    ],    
 
     "page_action": {
-        "default_title": "Hotelz"
+        "default_title": "Hotels"
     },
     "permissions": [
       "tabs", "http://www.marriott.com/reservation/*" , "https://www.marriott.com/reservation/*",

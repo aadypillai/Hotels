@@ -11,8 +11,8 @@ chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
        */
        new chrome.declarativeContent.PageStateMatcher({
          pageUrl: {
-          //  hostEquals: www.marriott.com,
-           schemes: [ 'http', 'https']
+          urlMatches: "www.marriott.com/reservation/rateListMenu.mi",
+          schemes: [ 'http', 'https']
          }
        })
        ], 
