@@ -11,7 +11,9 @@
         "js": ["all.js"]
       }
     ],    
-
+    "web_accessible_resources": [
+      "spinner_progress.gif"
+  ],
     "page_action": {
         "default_title": "Hotels"
     },
